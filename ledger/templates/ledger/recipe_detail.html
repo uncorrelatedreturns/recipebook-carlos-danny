@@ -24,3 +24,13 @@
     <li>{{ ri.ingredient.name }} - {{ ri.quantity }}</li>
   {% endfor %}
 </ul>
+
+<h3>Images</h3>
+{% for image in recipe.images.all %}
+    <div>
+        <img src="{{ image.image.url }}" alt="{{ image.description }}" style="max-width: 300px;">
+        <p>{{ image.description }}</p>
+    </div>
+{% empty %}
+    <p>No images yet.</p>
+{% endfor %}
