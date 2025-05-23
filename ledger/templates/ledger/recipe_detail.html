@@ -12,6 +12,14 @@
 <h1>Recipe Book</h1>
 <h2>{{ recipe.name }}</h2>
 <ul>
+
+{% if recipe.author %}
+  <h3>Author: {{ recipe.author.username }}</h3>
+{% else %}
+  <h3>Author: Unknown</h3>
+{% endif %}
+
+
   {% for ri in recipe.ingredients.all %}
     <li>{{ ri.ingredient.name }} - {{ ri.quantity }}</li>
   {% endfor %}
