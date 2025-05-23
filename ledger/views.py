@@ -30,3 +30,6 @@ def custom_login(request):
 def custom_logout(request):
     logout(request)
     return redirect('login')
+
+
+
