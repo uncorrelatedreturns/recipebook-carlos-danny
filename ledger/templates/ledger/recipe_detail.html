@@ -1,0 +1,7 @@
+<h1>Recipe Book</h1>
+<h2>{{ title }}</h2>
+<ul>
+  {% for ingredient in ingredients %}
+    <li>{{ ingredient.quantity }} {{ ingredient.name }}</li>
+  {% endfor %}
+</ul>
