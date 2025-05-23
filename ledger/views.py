@@ -4,6 +4,7 @@ from .models import Recipe
 def recipe_list(request):
     recipes = Recipe.objects.all()
     return render(request, "ledger/recipe_list.html", {"recipes": recipes})
+# Example access using hint: Ingredient.objects.filter(recipe__recipe__name="<Name of Recipe>")
 
 
 def recipe_detail(request, pk):
