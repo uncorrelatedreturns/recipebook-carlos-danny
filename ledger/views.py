@@ -3,6 +3,7 @@ from .models import Recipe
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from .forms import RecipeForm, RecipeIngredientFormSet
 
 @login_required
 def recipe_list(request):
@@ -31,5 +32,20 @@ def custom_logout(request):
     logout(request)
     return redirect('login')
 
-
+@login_required
+def add_recipe(request):
+    if request.method == 'POST':
+        form = RecipeForm(request.POST)
+        formset = RecipeIngredientFormSet(request.POST)
+        if form.is_valid() and formset.is_valid():
+            recipe = form.save(commit=False)
+            recipe.author = request.user
+            recipe.save()
+            formset.instance = recipe
+            formset.save()
+            return redirect('recipe_detail', pk=recipe.pk)
+    else:
+        form = RecipeForm()
+        formset = RecipeIngredientFormSet()
+    return render(request, 'ledger/recipe_add.html', {'form': form, 'formset': formset})
 
