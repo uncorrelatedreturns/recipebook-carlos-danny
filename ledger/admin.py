@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Ingredient, Recipe, RecipeIngredient, Profile
+from .models import Ingredient, Recipe, RecipeIngredient, Profile, RecipeImage
 
 
 admin.site.register(Profile)
@@ -13,7 +13,7 @@ class RecipeIngredientInline(admin.TabularInline):
 class RecipeAdmin(admin.ModelAdmin):
     list_display = ("name",)
     search_fields = ("name",)
-    inlines = [RecipeIngredientInline]
+    inlines = [RecipeIngredientInline, RecipeImageInline]
 
 @admin.register(Ingredient)
 class IngredientAdmin(admin.ModelAdmin):
@@ -24,3 +24,7 @@ class IngredientAdmin(admin.ModelAdmin):
 class RecipeIngredientAdmin(admin.ModelAdmin):
     list_display = ("recipe", "ingredient", "quantity")
     list_filter = ("recipe", "ingredient")
+
+class RecipeImageInline(admin.TabularInline):
+    model = RecipeImage
+    extra = 1
