@@ -49,3 +49,19 @@ def add_recipe(request):
         formset = RecipeIngredientFormSet()
     return render(request, 'ledger/recipe_add.html', {'form': form, 'formset': formset})
 
+
+@login_required
+def add_recipe_image(request, pk):
+    recipe = Recipe.objects.get(pk=pk)
+    if request.method == 'POST':
+        form = RecipeImageForm(request.POST, request.FILES)
+        if form.is_valid():
+            image = form.save(commit=False)
+            image.recipe = recipe
+            image.save()
+            return redirect('recipe_detail', pk=pk)
+    else:
+        form = RecipeImageForm()
+    return render(request, 'ledger/image_upload.html', {'form': form, 'recipe': recipe})
+
+
