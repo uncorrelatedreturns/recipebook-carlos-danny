@@ -3,7 +3,7 @@ from .models import Recipe
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from .forms import RecipeForm, RecipeIngredientFormSet
+from .forms import RecipeForm, RecipeIngredientFormSet, RecipeImageForm
 
 @login_required
 def recipe_list(request):
