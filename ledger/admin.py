@@ -9,6 +9,11 @@ class RecipeIngredientInline(admin.TabularInline):
     model = RecipeIngredient
     extra = 1
 
+
+class RecipeImageInline(admin.TabularInline):
+    model = RecipeImage
+    extra = 1
+
 @admin.register(Recipe)
 class RecipeAdmin(admin.ModelAdmin):
     list_display = ("name",)
@@ -25,6 +30,3 @@ class RecipeIngredientAdmin(admin.ModelAdmin):
     list_display = ("recipe", "ingredient", "quantity")
     list_filter = ("recipe", "ingredient")
 
-class RecipeImageInline(admin.TabularInline):
-    model = RecipeImage
-    extra = 1
