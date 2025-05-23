@@ -1,11 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
+from .models import Recipe
 
 def recipe_list(request):
-    recipes = [
-        {"name": "Pork Sinigang", "link": "/recipe/1"},
-        {"name": "Bicol Express", "link": "/recipe/2"},
-    ]
+    recipes = Recipe.objects.all()
     return render(request, "ledger/recipe_list.html", {"recipes": recipes})
+
 
 def recipe_1(request):
     context = {
